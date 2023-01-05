@@ -80,7 +80,7 @@ target_link_libraries(
   ${VELOX_LINK_LIBS}
   ${DOUBLE_CONVERSION}
   ${FOLLY_WITH_DEPENDENCIES}
-  ${FMT}
+  fmt::fmt
   ${LZ4}
   ${LZO}
   ${ZSTD}
@@ -97,7 +97,7 @@ target_link_libraries(
   ${VELOX_LINK_LIBS}
   ${DOUBLE_CONVERSION}
   ${FOLLY_WITH_DEPENDENCIES}
-  ${FMT}
+  fmt::fmt
   ${LZ4}
   ${LZO}
   ${ZSTD}
@@ -282,7 +282,7 @@ add_executable(velox_dwio_dwrf_byte_rle_test TestByteRle.cpp)
 add_test(velox_dwio_dwrf_byte_rle_test velox_dwio_dwrf_byte_rle_test)
 
 target_link_libraries(
-  velox_dwio_dwrf_byte_rle_test ${VELOX_LINK_LIBS} ${DOUBLE_CONVERSION} ${FMT}
+  velox_dwio_dwrf_byte_rle_test ${VELOX_LINK_LIBS} ${DOUBLE_CONVERSION} fmt::fmt
   ${FOLLY_WITH_DEPENDENCIES} ${TEST_LINK_LIBS})
 
 add_executable(velox_dwio_dwrf_byte_rle_encoder_test TestByteRLEEncoder.cpp)
@@ -291,7 +291,7 @@ add_test(velox_dwio_dwrf_byte_rle_encoder_test
 
 target_link_libraries(
   velox_dwio_dwrf_byte_rle_encoder_test ${VELOX_LINK_LIBS} ${DOUBLE_CONVERSION}
-  ${FMT} ${FOLLY_WITH_DEPENDENCIES} ${TEST_LINK_LIBS})
+  fmt::fmt ${FOLLY_WITH_DEPENDENCIES} ${TEST_LINK_LIBS})
 
 add_executable(velox_dwio_dwrf_int_encoder_test TestIntEncoder.cpp)
 add_test(velox_dwio_dwrf_int_encoder_test velox_dwio_dwrf_int_encoder_test)
@@ -310,7 +310,7 @@ add_test(velox_dwio_dwrf_int_direct_test velox_dwio_dwrf_int_direct_test)
 
 target_link_libraries(
   velox_dwio_dwrf_int_direct_test ${VELOX_LINK_LIBS} ${DOUBLE_CONVERSION}
-  ${FMT} ${FOLLY_WITH_DEPENDENCIES} ${TEST_LINK_LIBS})
+  fmt::fmt ${FOLLY_WITH_DEPENDENCIES} ${TEST_LINK_LIBS})
 
 add_executable(velox_dwio_dwrf_rlev1_encoder_test TestRLEv1Encoder.cpp)
 add_test(velox_dwio_dwrf_rlev1_encoder_test velox_dwio_dwrf_rlev1_encoder_test)
@@ -323,7 +323,7 @@ add_executable(velox_dwio_dwrf_column_reader_test TestColumnReader.cpp)
 add_test(velox_dwio_dwrf_column_reader_test velox_dwio_dwrf_column_reader_test)
 
 target_link_libraries(velox_dwio_dwrf_column_reader_test ${VELOX_LINK_LIBS}
-                      ${FOLLY_WITH_DEPENDENCIES} ${FMT} ${TEST_LINK_LIBS})
+                      ${FOLLY_WITH_DEPENDENCIES} fmt::fmt ${TEST_LINK_LIBS})
 
 add_executable(velox_dwio_dwrf_reader_test TestReader.cpp)
 add_test(
@@ -336,7 +336,7 @@ target_link_libraries(
   velox_dwrf_test_utils
   ${VELOX_LINK_LIBS}
   ${FOLLY_WITH_DEPENDENCIES}
-  ${FMT}
+  fmt::fmt
   ${LZ4}
   ${LZO}
   ${ZSTD}
@@ -351,7 +351,7 @@ target_link_libraries(
   velox_e2e_filter_test_base
   ${VELOX_LINK_LIBS}
   ${FOLLY_WITH_DEPENDENCIES}
-  ${FMT}
+  fmt::fmt
   ${LZ4}
   ${LZO}
   ${ZSTD}
@@ -376,7 +376,7 @@ target_link_libraries(
   velox_vector_test_lib
   ${VELOX_LINK_LIBS}
   ${FOLLY_WITH_DEPENDENCIES}
-  ${FMT}
+  fmt::fmt
   ${LZ4}
   ${LZO}
   ${ZSTD}
@@ -392,7 +392,7 @@ target_link_libraries(
   ${VELOX_LINK_LIBS}
   velox_dwrf_test_utils
   ${FOLLY_WITH_DEPENDENCIES}
-  ${FMT}
+  fmt::fmt
   ${LZ4}
   ${LZO}
   ${ZSTD}
@@ -407,7 +407,7 @@ target_link_libraries(
   velox_dwrf_test_utils
   ${VELOX_LINK_LIBS}
   ${FOLLY_WITH_DEPENDENCIES}
-  ${FMT}
+  fmt::fmt
   ${LZ4}
   ${LZO}
   ${ZSTD}
@@ -424,7 +424,7 @@ target_link_libraries(
   velox_vector_test_lib
   ${VELOX_LINK_LIBS}
   ${FOLLY_WITH_DEPENDENCIES}
-  ${FMT}
+  fmt::fmt
   ${LZ4}
   ${LZO}
   ${ZSTD}
@@ -438,7 +438,7 @@ target_link_libraries(
   velox_dwrf_test_utils
   ${VELOX_LINK_LIBS}
   ${FOLLY_WITH_DEPENDENCIES}
-  ${FMT}
+  fmt::fmt
   ${LZ4}
   ${LZO}
   ${ZSTD}
@@ -454,7 +454,7 @@ target_link_libraries(
   velox_dwrf_test_utils
   ${VELOX_LINK_LIBS}
   ${FOLLY_WITH_DEPENDENCIES}
-  ${FMT}
+  fmt::fmt
   ${LZ4}
   ${LZO}
   ${ZSTD}
@@ -475,7 +475,7 @@ target_link_libraries(
   velox_dwio_dwrf_writer
   ${FOLLY}
   ${FOLLY_BENCHMARK}
-  ${FMT})
+  fmt::fmt)
 
 add_executable(velox_dwio_cache_test CacheInputTest.cpp)
 
@@ -487,7 +487,7 @@ target_link_libraries(
   velox_temp_path
   ${DOUBLE_CONVERSION}
   ${FOLLY_WITH_DEPENDENCIES}
-  ${FMT}
+  fmt::fmt
   ${LZ4}
   ${LZO}
   ${ZSTD}

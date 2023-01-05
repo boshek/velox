@@ -29,7 +29,7 @@ target_link_libraries(
   gtest
   gtest_main
   ${GFLAGS_LIBRARIES}
-  ${FMT}
+  fmt::fmt
   velox_core
   velox_exec
   velox_exec_test_lib
@@ -94,7 +94,7 @@ target_link_libraries(
   gtest_main
   ${GFLAGS_LIBRARIES}
   glog::glog
-  ${FMT}
+  fmt::fmt
   velox_core
   velox_exec
   velox_codegen_utils_resource_path

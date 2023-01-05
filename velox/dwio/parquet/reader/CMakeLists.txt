@@ -34,4 +34,4 @@ target_link_libraries(
   arrow
   parquet
   thrift
-  ${FMT})
+  fmt::fmt)

@@ -42,7 +42,7 @@ target_link_libraries(
   gtest_main
   gmock
   glog::glog
-  ${FMT})
+  fmt::fmt)
 
 add_executable(velox_dwio_common_data_buffer_benchmark DataBufferBenchmark.cpp)
 
@@ -63,7 +63,7 @@ target_link_libraries(
   velox_parse_parser
   ${VELOX_LINK_LIBS}
   ${FOLLY_WITH_DEPENDENCIES}
-  ${FMT}
+  fmt::fmt
   ${LZ4}
   ${LZO}
   ${ZSTD}

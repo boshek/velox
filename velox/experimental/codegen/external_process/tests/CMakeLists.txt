@@ -26,4 +26,4 @@ target_link_libraries(
   ${DOUBLE_CONVERSION}
   ${GFLAGS_LIBRARIES}
   glog::glog
-  ${FMT})
+  fmt::fmt)
