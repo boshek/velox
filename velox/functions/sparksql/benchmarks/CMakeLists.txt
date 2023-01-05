@@ -21,5 +21,5 @@ target_link_libraries(
   velox_exec_test_lib
   velox_vector_test_lib
   velox_vector_fuzzer
-  ${FOLLY_WITH_DEPENDENCIES}
+  folly::folly
   ${FOLLY_BENCHMARK})

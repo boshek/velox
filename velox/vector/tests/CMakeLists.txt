@@ -53,7 +53,7 @@ target_link_libraries(
   ${Boost_SYSTEM_LIBRARIES}
   gtest
   gtest_main
-  ${FOLLY_WITH_DEPENDENCIES}
+  folly::folly
   ${DOUBLE_CONVERSION}
   ${gflags_LIBRARIES}
   glog::glog
@@ -72,7 +72,7 @@ target_link_libraries(
   velox_vector_test_lib
   gtest
   gtest_main
-  ${FOLLY_WITH_DEPENDENCIES}
+  folly::folly
   ${gflags_LIBRARIES}
   glog::glog
   fmt::fmt)
@@ -87,7 +87,7 @@ target_link_libraries(
   Boost::filesystem
   gtest
   gtest_main
-  ${FOLLY_WITH_DEPENDENCIES}
+  folly::folly
   ${gflags_LIBRARIES}
   glog::glog
   fmt::fmt)

@@ -35,7 +35,7 @@ target_link_libraries(
   velox_temp_path
   Boost::regex
   ${VELOX_LINK_LIBS}
-  ${FOLLY_WITH_DEPENDENCIES}
+  folly::folly
   ${TEST_LINK_LIBS}
   ${gflags_LIBRARIES}
   gtest
@@ -62,7 +62,7 @@ target_link_libraries(
   velox_functions_prestosql
   velox_parse_parser
   ${VELOX_LINK_LIBS}
-  ${FOLLY_WITH_DEPENDENCIES}
+  folly::folly
   fmt::fmt
   ${LZ4}
   ${LZO}

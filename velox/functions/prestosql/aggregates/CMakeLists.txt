@@ -50,7 +50,7 @@ target_link_libraries(
   velox_presto_serializer
   velox_functions_lib
   velox_functions_util
-  ${FOLLY_WITH_DEPENDENCIES})
+  folly::folly)
 
 if(${VELOX_BUILD_TESTING})
   add_subdirectory(tests)

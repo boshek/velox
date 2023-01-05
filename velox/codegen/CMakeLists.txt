@@ -17,7 +17,7 @@ if(${VELOX_CODEGEN_SUPPORT})
   target_link_libraries(velox_codegen velox_experimental_codegen)
 else()
   target_link_libraries(velox_codegen velox_core velox_exec velox_expression
-                        ${FOLLY_WITH_DEPENDENCIES})
+                        folly::folly)
 endif()
 if(${VELOX_BUILD_TESTING})
   add_subdirectory(tests)

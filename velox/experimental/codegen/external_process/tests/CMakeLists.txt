@@ -21,7 +21,7 @@ target_link_libraries(
   velox_codegen_external_process_test
   gtest
   gtest_main
-  ${FOLLY_WITH_DEPENDENCIES}
+  folly::folly
   ${Boost_FILESYSTEM_LIBRARIES}
   ${DOUBLE_CONVERSION}
   ${GFLAGS_LIBRARIES}

@@ -33,7 +33,7 @@ add_library(
   StringEncodingUtils.cpp)
 
 target_link_libraries(velox_functions_lib velox_vector ${RE2}
-                      ${FOLLY_WITH_DEPENDENCIES})
+                      folly::folly)
 
 add_subdirectory(string)
 if(${VELOX_BUILD_TESTING})

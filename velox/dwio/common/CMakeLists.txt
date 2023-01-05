@@ -62,5 +62,5 @@ target_link_libraries(
   velox_expression
   velox_memory
   Boost::regex
-  ${FOLLY_WITH_DEPENDENCIES}
+  folly::folly
   glog::glog)
