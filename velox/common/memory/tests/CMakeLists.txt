@@ -31,7 +31,7 @@ target_link_libraries(
   velox_test_util
   gtest
   gtest_main
-  ${gflags_LIBRARIES}
+  gflags::gflags
   gmock
   glog::glog)
 
@@ -45,5 +45,5 @@ target_link_libraries(
   glog::glog
   gtest
   gtest_main
-  ${gflags_LIBRARIES}
+  gflags::gflags
   pthread)

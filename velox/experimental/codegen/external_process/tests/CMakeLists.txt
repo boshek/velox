@@ -24,6 +24,6 @@ target_link_libraries(
   folly::folly
   ${Boost_FILESYSTEM_LIBRARIES}
   ${DOUBLE_CONVERSION}
-  ${GFLAGS_LIBRARIES}
+  gflags::gflags
   glog::glog
   fmt::fmt)

@@ -40,4 +40,4 @@ target_link_libraries(
   gtest
   gtest_main
   gmock
-  ${gflags_LIBRARIES})
+  gflags::gflags)

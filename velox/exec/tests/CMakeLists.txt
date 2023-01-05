@@ -101,7 +101,7 @@ target_link_libraries(
   gmock
   folly::folly
   ${DOUBLE_CONVERSION}
-  ${gflags_LIBRARIES}
+  gflags::gflags
   glog::glog
   fmt::fmt
   ${FILESYSTEM})

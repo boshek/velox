@@ -55,7 +55,7 @@ target_link_libraries(
   gtest_main
   folly::folly
   ${DOUBLE_CONVERSION}
-  ${gflags_LIBRARIES}
+  gflags::gflags
   glog::glog
   fmt::fmt
   dl)
@@ -73,7 +73,7 @@ target_link_libraries(
   gtest
   gtest_main
   folly::folly
-  ${gflags_LIBRARIES}
+  gflags::gflags
   glog::glog
   fmt::fmt)
 
@@ -88,6 +88,6 @@ target_link_libraries(
   gtest
   gtest_main
   folly::folly
-  ${gflags_LIBRARIES}
+  gflags::gflags
   glog::glog
   fmt::fmt)

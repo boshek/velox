@@ -37,7 +37,7 @@ target_link_libraries(
   ${VELOX_LINK_LIBS}
   folly::folly
   ${TEST_LINK_LIBS}
-  ${gflags_LIBRARIES}
+  gflags::gflags
   gtest
   gtest_main
   gmock

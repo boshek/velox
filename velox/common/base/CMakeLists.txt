@@ -20,7 +20,7 @@ target_link_libraries(
   glog::glog
   folly::folly
   fmt::fmt
-  ${GFLAGS_LIBRARIES})
+  gflags::gflags)
 
 add_library(
   velox_common_base
