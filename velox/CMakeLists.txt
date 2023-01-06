@@ -12,8 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# VELOX BASE
-include_directories(external/xxhash)
+# VELOX BASE TODO only include in targets that use it
+include_directories(velox_base external/xxhash)
+
 add_subdirectory(buffer)
 add_subdirectory(common)
 add_subdirectory(core)

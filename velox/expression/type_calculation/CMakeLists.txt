@@ -23,8 +23,8 @@ flex_target(
 
 add_flex_bison_dependency(TypeCalculationScanner TypeCalculationParser)
 
-include_directories(${PROJECT_BINARY_DIR})
-include_directories(${FLEX_INCLUDE_DIRS})
 add_library(velox_type_calculation ${BISON_TypeCalculationParser_OUTPUTS}
                                    ${FLEX_TypeCalculationScanner_OUTPUTS})
+target_include_directories(velox_type_calculation PRIVATE ${PROJECT_BINARY_DIR}
+                                                          ${FLEX_INCLUDE_DIRS})
 target_link_libraries(velox_type_calculation velox_common_base)

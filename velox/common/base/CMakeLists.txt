@@ -33,7 +33,8 @@ add_library(
   StatsReporter.cpp
   SuccinctPrinter.cpp)
 
-target_link_libraries(velox_common_base velox_exception velox_process xsimd)
+target_link_libraries(velox_common_base velox_exception velox_process
+                      xsimd::xsimd)
 
 if(${VELOX_BUILD_TESTING})
   add_subdirectory(tests)
