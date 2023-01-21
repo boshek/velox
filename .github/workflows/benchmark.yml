@@ -59,7 +59,7 @@ jobs:
         with:
           path: 'head'
           submodules: 'recursive'
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
         with:
           python-version: '3.8'
           cache: 'pip'
@@ -68,7 +68,7 @@ jobs:
       - name: "Setup Ubuntu"
         run: |
           # Run the setup script from HEAD so changes from PRs are reflected.
-          ./head/scripts/setup-ubuntu.sh
+          sudo ./head/scripts/setup-ubuntu.sh
 
       - name: build-benchmarks
         run: |
