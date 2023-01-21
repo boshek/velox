@@ -60,6 +60,11 @@ jobs:
         with:
           path: 'head'
           submodules: 'recursive'
+      
+      - run: |
+          apt update
+          apt install -y lsb-release
+          
       - uses: actions/setup-python@v4
         with:
           python-version: '3.8'
