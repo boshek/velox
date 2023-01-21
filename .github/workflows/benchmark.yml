@@ -25,8 +25,8 @@ permissions:
 
 jobs:
   benchmark:
-    runs-on: ubuntu-20.04
-    # container: ghcr.io/facebookincubator/velox-dev:circleci-avx
+    runs-on: ubuntu-latest
+    container: ghcr.io/facebookincubator/velox-dev:amd64-ubuntu-22.04-avx
     env:
       CCACHE_DIR: "${{ github.workspace }}/.ccache/"
       BINARY_DIR: "${{ github.workspace }}/benchmarks/"
@@ -66,14 +66,14 @@ jobs:
           cache: 'pip'
           cache-dependency-path: 'head/scripts/*'
       
-      - name: "Setup Ubuntu"
-        run: |
-          # install libunwind explicitly to avoid dependecy hell
-          # https://bugs.launchpad.net/ubuntu/+source/google-glog/+bug/1991919
-          sudo apt install -y libunwind-dev
+      # - name: "Setup Ubuntu"
+      #   run: |
+      #     # install libunwind explicitly to avoid dependecy hell
+      #     # https://bugs.launchpad.net/ubuntu/+source/google-glog/+bug/1991919
+      #     sudo apt install -y libunwind-dev
 
-          # Run the setup script from HEAD so changes from PRs are reflected.
-          sudo ./head/scripts/setup-ubuntu.sh
+      #     # Run the setup script from HEAD so changes from PRs are reflected.
+      #     sudo ./head/scripts/setup-ubuntu.sh
 
       - name: build-benchmarks
         run: |
