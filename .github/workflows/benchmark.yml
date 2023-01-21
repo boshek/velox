@@ -23,6 +23,10 @@ on:
 permissions:
   contents: read
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   benchmark:
     runs-on: ubuntu-latest
@@ -82,7 +86,6 @@ jobs:
 
       - name: build-benchmarks
         run: |
-          ls -la
           build_benchmarks() {
             echo "::group::Build $2 Benchmarks"
             pushd $1
