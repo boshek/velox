@@ -63,8 +63,8 @@ jobs:
       
       - run: |
           apt update
-          apt install -y lsb-release
-          
+          apt install -y lsb-release python3
+
       - uses: actions/setup-python@v4
         with:
           python-version: '3.8'
