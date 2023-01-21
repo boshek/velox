@@ -67,6 +67,10 @@ jobs:
       
       - name: "Setup Ubuntu"
         run: |
+          # install libunwind explicitly to avoid dependecy hell
+          # https://bugs.launchpad.net/ubuntu/+source/google-glog/+bug/1991919
+          sudo apt install -y libunwind-dev
+
           # Run the setup script from HEAD so changes from PRs are reflected.
           sudo ./head/scripts/setup-ubuntu.sh
 
