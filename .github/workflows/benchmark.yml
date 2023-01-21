@@ -37,11 +37,6 @@ jobs:
       BASELINE_OUTPUT_PATH: "${{ github.workspace }}/benchmark-results/baseline/"
       TARGET_OUTPUT_PATH: "${{ github.workspace }}/benchmark-results/target/"
     steps:
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '3.8'
-          cache: 'pip'
-
       - run: |
             # Set up xml gtest output.
             mkdir -p /tmp/test_xml_output/
@@ -64,6 +59,11 @@ jobs:
         with:
           path: 'head'
           submodules: 'recursive'
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+          cache: 'pip'
+          cache-dependency-path: 'head/scripts/requirements.txt'
       
       - name: "Setup Ubuntu"
         run: |
