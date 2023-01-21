@@ -63,7 +63,7 @@ jobs:
         with:
           python-version: '3.8'
           cache: 'pip'
-          cache-dependency-path: './head/scripts/requirements.txt'
+          cache-dependency-path: 'head/scripts/*'
       
       - name: "Setup Ubuntu"
         run: |
@@ -102,7 +102,7 @@ jobs:
                 EXTRA_BENCHMARK_FLAGS="--binary_path ${BINARY_DIR}/baseline/ --output_path ${BASELINE_OUTPUT_PATH}"
             make benchmarks-basic-run \
                 EXTRA_BENCHMARK_FLAGS="--binary_path ${BINARY_DIR}/target/ --output_path ${TARGET_OUTPUT_PATH}"
-                # --conbench_upload_run_id CircleCI-${CIRCLE_BUILD_NUM}-dedicated"
+                # --conbench_upload_run_id GitHub-${{ github.run_id }}-dedicated"
             ./scripts/benchmark-runner.py compare \
                 --baseline_path ${BASELINE_OUTPUT_PATH} \
                 --target_path ${TARGET_OUTPUT_PATH} \
@@ -122,7 +122,7 @@ jobs:
       #         make benchmarks-basic-run \
       #             EXTRA_BENCHMARK_FLAGS="--binary_path _build/benchmarks/baseline/ --output_path ${BASELINE_OUTPUT_PATH}/rerun-${i}/ --rerun_json_input ${CURRENT_JSON_RERUN}"
       #         make benchmarks-basic-run \
-      #             EXTRA_BENCHMARK_FLAGS="--binary_path _build/benchmarks/target/ --output_path ${TARGET_OUTPUT_PATH}/rerun-${i}/ --rerun_json_input ${CURRENT_JSON_RERUN} --conbench_upload_run_id CircleCI-${CIRCLE_BUILD_NUM}-dedicated"
+      #             EXTRA_BENCHMARK_FLAGS="--binary_path _build/benchmarks/target/ --output_path ${TARGET_OUTPUT_PATH}/rerun-${i}/ --rerun_json_input ${CURRENT_JSON_RERUN} --conbench_upload_run_id GitHub-${{ github.run_id }}-dedicated"
       #         ./scripts/benchmark-runner.py compare \
       #             --baseline_path ${BASELINE_OUTPUT_PATH}/rerun-${i}/ \
       #             --target_path ${TARGET_OUTPUT_PATH}/rerun-${i}/ \
