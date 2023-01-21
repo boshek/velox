@@ -437,7 +437,7 @@ if(CMAKE_HOST_SYSTEM_NAME MATCHES "Darwin")
 endif()
 find_package(BISON 3.0.4 REQUIRED)
 find_package(FLEX 2.5.13 REQUIRED)
-
+message(STATUS "Found Flex ${FLEX_INCLUDE_DIRS}")
 include_directories(SYSTEM velox)
 include_directories(SYSTEM velox/external)
 include_directories(SYSTEM velox/external/duckdb)

@@ -25,7 +25,7 @@ permissions:
 
 jobs:
   benchmark:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     # container: ghcr.io/facebookincubator/velox-dev:circleci-avx
     env:
       CCACHE_DIR: "${{ github.workspace }}/.ccache/"
@@ -42,7 +42,8 @@ jobs:
             mkdir -p /tmp/test_xml_output/
             echo "XML_OUTPUT_FILE=/tmp/test_xml_output/" >> $GITHUB_ENV
 
-            # Set up ccache configs.
+            # TODO CCACHE caching
+            # Set up ccache configs .
             # mkdir -p .ccache
             # echo "export CCACHE_DIR=$(realpath .ccache)" >> $BASH_ENV
             # ccache -sz -M 5Gi
@@ -77,14 +78,14 @@ jobs:
       - name: build-benchmarks
         run: |
           build_benchmarks() {
-            echo "::start-group::Build $2 Benchmarks"
+            echo "::group::Build $2 Benchmarks"
             pushd $1
             n_cores=$(nproc)
             make benchmarks-basic-build NUM_THREADS=$n_cores MAX_HIGH_MEM_JOBS=$((n_cores/2)) MAX_LINK_JOBS=$n_cores
             ccache -s
             mkdir -p $3
             cp -r --verbose _build/release/velox/benchmarks/basic/* $3
-            echo "::end-group::"
+            echo "::endgroup::"
             popd
           }
 
