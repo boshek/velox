@@ -56,7 +56,6 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: "facebookincubator/velox"
-          ref: "5670a7b9f4f801e3e4cd72fc87fe9ee34d211a61"
           path: 'base'
           submodules: 'recursive'
 
