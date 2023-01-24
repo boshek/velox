@@ -29,7 +29,7 @@ defaults:
 
 jobs:
   benchmark:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     container: ghcr.io/facebookincubator/velox-dev:amd64-ubuntu-22.04-avx
     env:
       CCACHE_DIR: "${{ github.workspace }}/.ccache/"
@@ -46,11 +46,9 @@ jobs:
             mkdir -p /tmp/test_xml_output/
             echo "XML_OUTPUT_FILE=/tmp/test_xml_output/" >> $GITHUB_ENV
 
-            # TODO CCACHE caching
             # Set up ccache configs .
-            # mkdir -p .ccache
-            # echo "export CCACHE_DIR=$(realpath .ccache)" >> $BASH_ENV
-            # ccache -sz -M 5Gi
+            mkdir -p .ccache
+            ccache -sz -M 5Gi
 
       - name: "Checkout Base"
         uses: actions/checkout@v3
@@ -68,7 +66,7 @@ jobs:
       
       - run: |
           apt update
-          apt install -y lsb-release python3
+          apt install -y lsb-release python3 pip
 
       # - uses: actions/setup-python@v4
       #   with:
@@ -105,7 +103,7 @@ jobs:
       - name: "Install benchmark dependencies"
         run: |
           cd head
-          python -m pip install -r scripts/benchmark-requirements.txt
+          python3 -m pip install -r scripts/benchmark-requirements.txt
 
       - name: "Run Benchmarks - Full Round"
         working-directory: 'head'
@@ -117,33 +115,33 @@ jobs:
                 EXTRA_BENCHMARK_FLAGS="--binary_path ${BINARY_DIR}/baseline/ --output_path ${BASELINE_OUTPUT_PATH}"
             make benchmarks-basic-run \
                 EXTRA_BENCHMARK_FLAGS="--binary_path ${BINARY_DIR}/target/ --output_path ${TARGET_OUTPUT_PATH}"
-                # --conbench_upload_run_id GitHub-${{ github.run_id }}-dedicated"
+
             ./scripts/benchmark-runner.py compare \
                 --baseline_path ${BASELINE_OUTPUT_PATH} \
                 --target_path ${TARGET_OUTPUT_PATH} \
                 --rerun_json_output "${RESULTS_ROOT}/rerun_json_output_0.json" \
                 --do_not_fail
-      # - name: "Run Benchmarks - Reruns"
-      #   working-directory: 'head'
-      #   run: |
-      #       for i in 1 2 3 4 5; do
-      #         CURRENT_JSON_RERUN="${RESULTS_ROOT}/rerun_json_output_$((${i} - 1)).json"
-      #         NEXT_JSON_RERUN="${RESULTS_ROOT}/rerun_json_output_${i}.json"
-      #         if [ ! -s "${CURRENT_JSON_RERUN}" ]; then
-      #           echo "--> Rerun iteration ${i} found empty file. Finalizing."
-      #           break
-      #         fi
-      #         echo "--> Starting rerun iteration: ${i}"
-      #         make benchmarks-basic-run \
-      #             EXTRA_BENCHMARK_FLAGS="--binary_path _build/benchmarks/baseline/ --output_path ${BASELINE_OUTPUT_PATH}/rerun-${i}/ --rerun_json_input ${CURRENT_JSON_RERUN}"
-      #         make benchmarks-basic-run \
-      #             EXTRA_BENCHMARK_FLAGS="--binary_path _build/benchmarks/target/ --output_path ${TARGET_OUTPUT_PATH}/rerun-${i}/ --rerun_json_input ${CURRENT_JSON_RERUN} --conbench_upload_run_id GitHub-${{ github.run_id }}-dedicated"
-      #         ./scripts/benchmark-runner.py compare \
-      #             --baseline_path ${BASELINE_OUTPUT_PATH}/rerun-${i}/ \
-      #             --target_path ${TARGET_OUTPUT_PATH}/rerun-${i}/ \
-      #             --rerun_json_output ${NEXT_JSON_RERUN} \
-      #             --do_not_fail
-      #       done
+      - name: "Run Benchmarks - Reruns"
+        working-directory: 'head'
+        run: |
+            for i in 1 2 3 4 5; do
+              CURRENT_JSON_RERUN="${RESULTS_ROOT}/rerun_json_output_$((${i} - 1)).json"
+              NEXT_JSON_RERUN="${RESULTS_ROOT}/rerun_json_output_${i}.json"
+              if [ ! -s "${CURRENT_JSON_RERUN}" ]; then
+                echo "--> Rerun iteration ${i} found empty file. Finalizing."
+                break
+              fi
+              echo "--> Starting rerun iteration: ${i}"
+              make benchmarks-basic-run \
+                  EXTRA_BENCHMARK_FLAGS="--binary_path _build/benchmarks/baseline/ --output_path ${BASELINE_OUTPUT_PATH}/rerun-${i}/ --rerun_json_input ${CURRENT_JSON_RERUN}"
+              make benchmarks-basic-run \
+                  EXTRA_BENCHMARK_FLAGS="--binary_path _build/benchmarks/target/ --output_path ${TARGET_OUTPUT_PATH}/rerun-${i}/ --rerun_json_input ${CURRENT_JSON_RERUN}"
+              ./scripts/benchmark-runner.py compare \
+                  --baseline_path ${BASELINE_OUTPUT_PATH}/rerun-${i}/ \
+                  --target_path ${TARGET_OUTPUT_PATH}/rerun-${i}/ \
+                  --rerun_json_output ${NEXT_JSON_RERUN} \
+                  --do_not_fail
+            done
       - name: "Run Benchmarks - Summary"
         working-directory: 'head'
         run: |
@@ -153,6 +151,7 @@ jobs:
                 --recursive \
                 --do_not_fail
       - uses: actions/upload-artifact@v3
+        if: always()
         with:
           path: "benchmark-results"
           name: "benchmark-results"
