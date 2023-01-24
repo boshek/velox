@@ -82,12 +82,13 @@ def compare_file(args, target_data, baseline_data):
         output_map = defaultdict(dict)
         for file_name, data in input_map.items():
             retry = get_retry_name(args, file_name)
-            for row in data:
+            for binary_path, benchmark, time in data:
                 # Folly benchmark exports line separators by mistake as an entry on
                 # the json file.
-                if row[1] == "-":
+                if benchmark == "-":
                     continue
-                output_map[(row[0], row[1])][retry] = row[2]
+                binary_name = pathlib.Path(binary_path).stem
+                output_map[(binary_name, benchmark)][retry] = time
         return output_map
 
     baseline_map = preprocess_data(baseline_data)
