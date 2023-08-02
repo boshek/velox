@@ -232,12 +232,13 @@ target_link_libraries(
 add_library(velox_join_fuzzer JoinFuzzer.cpp)
 
 target_link_libraries(
-  velox_join_fuzzer PRIVATE velox_exec_test_lib  velox_temp_path
+  velox_join_fuzzer PRIVATE velox_exec_test_lib velox_temp_path
                             velox_vector_fuzzer Boost::headers)
 
 add_executable(velox_join_fuzzer_test JoinFuzzerTest.cpp)
 
-target_link_libraries(velox_join_fuzzer_test velox_join_fuzzer velox_presto_serializer gtest gtest_main)
+target_link_libraries(velox_join_fuzzer_test velox_join_fuzzer
+                      velox_presto_serializer gtest gtest_main)
 
 add_executable(velox_aggregation_runner_test AggregationRunnerTest.cpp)
 
