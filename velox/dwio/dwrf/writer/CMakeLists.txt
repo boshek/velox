@@ -28,14 +28,11 @@ add_library(
 
 target_link_libraries(
   velox_dwio_dwrf_writer
-  velox_dwio_common
-  velox_dwio_dwrf_common
-  velox_dwio_dwrf_utils
-  velox_process
-  velox_time
-  velox_vector
-  Boost::headers
-  lz4::lz4
-  lzo2::lzo2
-  zstd::zstd
-  ZLIB::ZLIB)
+  PUBLIC velox_dwio_common
+         velox_dwio_dwrf_common
+         velox_exception
+         velox_time
+         velox_type
+         velox_vector
+         Folly::folly
+  PRIVATE velox_dwio_common_exception velox_dwio_dwrf_utils velox_process)

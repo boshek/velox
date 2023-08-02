@@ -28,12 +28,19 @@ add_library(
 
 target_link_libraries(
   velox_dwio_native_parquet_reader
-  velox_dwio_parquet_thrift
-  velox_type
-  velox_dwio_common
-  fmt::fmt
-  parquet
-  arrow
-  Snappy::snappy
-  thrift
-  zstd::zstd)
+  PUBLIC velox_common_base
+         velox_dwio_common
+         velox_dwio_parquet_thrift
+         velox_type
+         velox_vector
+         Folly::folly
+         arrow
+         parquet
+         thrift::thrift
+  PRIVATE velox_common_compression
+          velox_exception
+          Snappy::snappy
+          ZLIB::ZLIB
+          lz4::lz4
+          thrift::thrift
+          zstd::zstd)

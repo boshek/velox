@@ -16,26 +16,18 @@ add_library(velox_tpch_benchmark_lib TpchBenchmark.cpp)
 
 target_link_libraries(
   velox_tpch_benchmark_lib
-  velox_aggregates
-  velox_exec
-  velox_exec_test_lib
-  velox_dwio_common
-  velox_dwio_common_exception
-  velox_dwio_parquet_reader
-  velox_dwio_common_test_utils
-  velox_hive_connector
-  velox_exception
-  velox_memory
-  velox_process
-  velox_serialization
-  velox_encode
-  velox_type
-  velox_type_fbhive
-  velox_caching
-  velox_vector_test_lib
-  Folly::folly
-  ${FOLLY_BENCHMARK}
-  fmt::fmt)
+  PUBLIC velox_hive_connector ${FOLLY_BENCHMARK}
+  PRIVATE velox_aggregates
+          velox_common_base
+          velox_dwio_common
+          velox_exec
+          velox_exec_test_lib
+          velox_file
+          velox_functions_prestosql
+          velox_memory
+          velox_parse_utils
+          Folly::folly
+          gflags::gflags)
 
 add_executable(velox_tpch_benchmark TpchBenchmarkMain.cpp)
 

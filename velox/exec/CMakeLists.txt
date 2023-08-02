@@ -80,15 +80,26 @@ add_library(
 
 target_link_libraries(
   velox_exec
-  velox_file
-  velox_core
-  velox_vector
-  velox_connector
-  velox_time
-  velox_codegen
-  velox_common_base
-  velox_test_util
-  velox_arrow_bridge)
+  PUBLIC velox_common_base
+         velox_connector
+         velox_core
+         velox_expression
+         velox_expression_functions
+         velox_file
+         velox_memory
+         velox_process
+         velox_time
+         velox_type
+         velox_vector
+         Folly::folly
+         fmt::fmt
+  PRIVATE velox_codegen
+          velox_exception
+          velox_presto_serializer
+          velox_test_util
+          Boost::headers
+          gflags::gflags
+          re2::re2)
 
 if(${VELOX_BUILD_TESTING})
   add_subdirectory(tests)

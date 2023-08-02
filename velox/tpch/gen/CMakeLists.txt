@@ -13,7 +13,10 @@
 # limitations under the License.
 add_library(velox_tpch_gen TpchGen.cpp DBGenIterator.cpp)
 
-target_link_libraries(velox_tpch_gen velox_memory velox_vector dbgen duckdb)
+target_link_libraries(
+  velox_tpch_gen
+  PUBLIC velox_memory velox_vector dbgen duckdb
+  PRIVATE velox_exception Folly::folly)
 
 if(${VELOX_BUILD_TESTING})
   add_subdirectory(tests)

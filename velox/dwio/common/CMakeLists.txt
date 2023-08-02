@@ -56,14 +56,18 @@ target_include_directories(velox_dwio_common PRIVATE ${Protobuf_INCLUDE_DIRS})
 
 target_link_libraries(
   velox_dwio_common
-  velox_buffer
-  velox_caching
-  velox_common_compression
-  velox_dwio_common_encryption
-  velox_dwio_common_exception
-  velox_exception
-  velox_expression
-  velox_memory
-  Boost::regex
-  Folly::folly
-  glog::glog)
+  PUBLIC velox_caching
+         velox_common_base
+         velox_common_compression
+         velox_dwio_common_encryption
+         velox_dwio_common_exception
+         velox_dwio_dwrf_proto
+         velox_exception
+         velox_file
+         velox_memory
+         velox_process
+         velox_type
+         velox_vector
+         Folly::folly
+         xsimd
+  PRIVATE velox_expression velox_time fmt::fmt gflags::gflags glog::glog)

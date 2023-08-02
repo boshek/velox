@@ -15,8 +15,10 @@
 add_library(velox_expression_test_utility ArgumentTypeFuzzer.cpp
                                           FuzzerToolkit.cpp)
 
-target_link_libraries(velox_expression_test_utility velox_type
-                      velox_expression_functions gtest)
+target_link_libraries(
+  velox_expression_test_utility
+  PUBLIC velox_expression_functions velox_type velox_vector
+  PRIVATE Boost::headers)
 
 add_executable(
   velox_expression_test
@@ -88,19 +90,25 @@ target_link_libraries(
 add_library(velox_expression_verifier ExpressionVerifier.cpp)
 
 target_link_libraries(
-  velox_expression_verifier velox_vector_test_lib velox_vector_fuzzer
-  velox_type velox_expression_test_utility)
+  velox_expression_verifier
+  PUBLIC velox_core velox_expression_test_utility velox_function_registry
+         velox_type velox_vector velox_vector_fuzzer
+  PRIVATE velox_common_base velox_expression velox_vector_test_lib)
 
 add_library(velox_expression_fuzzer ExpressionFuzzer.cpp FuzzerRunner.cpp)
 
 target_link_libraries(
   velox_expression_fuzzer
-  velox_expression_verifier
-  velox_type
-  velox_vector_fuzzer
-  velox_vector_test_lib
-  velox_function_registry
-  velox_expression_test_utility)
+  PUBLIC velox_core
+         velox_expression
+         velox_expression_test_utility
+         velox_expression_verifier
+         velox_function_registry
+         velox_vector_fuzzer
+         velox_vector_test_lib
+         Folly::folly
+         gtest
+  PRIVATE velox_exception velox_expression_functions Boost::headers glog::glog)
 
 add_executable(velox_expression_fuzzer_unit_test ExpressionFuzzerUnitTest.cpp)
 
@@ -114,8 +122,20 @@ target_link_libraries(
   gtest_main)
 
 add_library(velox_expression_runner ExpressionRunner.cpp)
-target_link_libraries(velox_expression_runner velox_expression_verifier
-                      velox_functions_prestosql velox_parse_parser gtest)
+target_link_libraries(
+  velox_expression_runner
+  PUBLIC velox_parse_expression
+  PRIVATE velox_common_base
+          velox_core
+          velox_exec_test_lib
+          velox_expression
+          velox_expression_verifier
+          velox_memory
+          velox_parse_parser
+          velox_parse_utils
+          velox_vector
+          velox_vector_fuzzer
+          gtest)
 
 add_executable(velox_expression_runner_test ExpressionRunnerTest.cpp)
 target_link_libraries(

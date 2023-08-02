@@ -13,4 +13,7 @@
 # limitations under the License.
 
 add_library(velox_common_compression Compression.cpp LzoDecompressor.cpp)
-target_link_libraries(velox_common_compression Folly::folly)
+target_link_libraries(
+  velox_common_compression
+  PUBLIC Folly::folly
+  PRIVATE velox_dwio_common_exception velox_exception)

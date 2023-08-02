@@ -14,7 +14,10 @@
 
 add_library(velox_temp_path TempFilePath.cpp TempDirectoryPath.cpp)
 
-target_link_libraries(velox_temp_path velox_exception)
+target_link_libraries(
+  velox_temp_path
+  PUBLIC velox_exception
+  PRIVATE Boost::filesystem)
 
 add_library(
   velox_exec_test_lib
@@ -31,20 +34,35 @@ add_library(
 
 target_link_libraries(
   velox_exec_test_lib
-  velox_vector_test_lib
-  velox_temp_path
-  velox_core
-  velox_exception
-  velox_expression
-  velox_parse_parser
-  velox_duckdb_conversion
-  velox_dwio_common
-  velox_dwio_dwrf_reader
-  velox_dwio_dwrf_writer
-  velox_dwio_common_test_utils
-  velox_type_fbhive
-  velox_hive_connector
-  velox_tpch_connector
-  velox_presto_serializer
-  velox_functions_prestosql
-  velox_aggregates)
+  PUBLIC velox_caching
+         velox_core
+         velox_dwio_common
+         velox_dwio_dwrf_common
+         velox_exec
+         velox_hive_connector
+         velox_memory
+         velox_parse_parser
+         velox_temp_path
+         velox_tpch_connector
+         velox_type
+         velox_vector
+         velox_vector_fuzzer
+         velox_vector_test_lib
+         Folly::folly
+         gtest
+  PRIVATE velox_aggregates
+          velox_common_base
+          velox_duckdb_conversion
+          velox_duckdb_parser
+          velox_dwio_common_test_utils
+          velox_dwio_dwrf_reader
+          velox_dwio_dwrf_writer
+          velox_expression
+          velox_expression_functions
+          velox_file
+          velox_functions_prestosql
+          velox_parse_expression
+          velox_parse_utils
+          velox_presto_serializer
+          velox_test_util
+          velox_tpch_gen)

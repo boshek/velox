@@ -16,8 +16,10 @@ add_library(
   BitwiseXorAggregate.cpp BloomFilterAggAggregate.cpp FirstLastAggregate.cpp
   AverageAggregate.cpp MinMaxByAggregate.cpp Register.cpp)
 
-target_link_libraries(velox_functions_spark_aggregates fmt::fmt velox_exec
-                      velox_expression_functions velox_aggregates velox_vector)
+target_link_libraries(
+  velox_functions_spark_aggregates
+  PRIVATE velox_exec velox_expression_functions velox_functions_aggregates
+          velox_vector)
 
 if(${VELOX_BUILD_TESTING})
   add_subdirectory(tests)

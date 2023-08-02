@@ -13,13 +13,16 @@
 # limitations under the License.
 add_library(velox_duckdb_conversion DuckConversion.cpp DuckWrapper.cpp)
 
-target_link_libraries(velox_duckdb_conversion velox_core velox_vector duckdb
-                      tpch_extension)
+target_link_libraries(
+  velox_duckdb_conversion
+  PUBLIC velox_core velox_type velox_vector
+  PRIVATE velox_common_base duckdb tpch_extension)
 
 add_library(velox_duckdb_parser DuckParser.cpp)
 
-target_link_libraries(velox_duckdb_parser velox_duckdb_conversion duckdb
-                      velox_parse_expression)
+target_link_libraries(
+  velox_duckdb_parser PRIVATE velox_core velox_duckdb_conversion
+                              velox_exception velox_parse_expression velox_type duckdb)
 
 if(${VELOX_BUILD_TESTING})
   add_subdirectory(tests)

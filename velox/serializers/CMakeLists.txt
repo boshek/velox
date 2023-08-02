@@ -15,8 +15,10 @@ add_library(
   velox_presto_serializer PrestoSerializer.cpp UnsafeRowSerializer.cpp
                           CompactRowSerializer.cpp)
 
-target_link_libraries(velox_presto_serializer velox_dwio_common velox_vector
-                      velox_row_fast)
+target_link_libraries(
+  velox_presto_serializer
+  PUBLIC velox_common_compression velox_vector
+  PRIVATE velox_memory velox_presto_types velox_row_fast Folly::folly)
 
 if(${VELOX_BUILD_TESTING})
   add_subdirectory(tests)

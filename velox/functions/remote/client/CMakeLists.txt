@@ -13,14 +13,17 @@
 # limitations under the License.
 
 add_library(velox_functions_remote_thrift_client ThriftClient.cpp)
-target_link_libraries(velox_functions_remote_thrift_client
-                      PUBLIC velox_remote_function_thrift FBThrift::thriftcpp2)
+target_link_libraries(
+  velox_functions_remote_thrift_client
+  PUBLIC Folly::folly
+  PRIVATE thrift::thrift)
 
 add_library(velox_functions_remote Remote.cpp)
 target_link_libraries(
   velox_functions_remote
-  PUBLIC velox_expression velox_functions_remote_thrift_client
-         velox_functions_remote_get_serde velox_type_fbhive Folly::folly)
+  PUBLIC velox_expression Folly::folly
+  PRIVATE velox_functions_remote_get_serde velox_functions_remote_thrift_client
+          velox_type_fbhive velox_vector)
 
 if(${VELOX_BUILD_TESTING})
   add_subdirectory(tests)

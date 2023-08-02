@@ -13,8 +13,8 @@
 # limitations under the License.
 
 add_library(velox_dwio_catalog_fbhive FileUtils.cpp)
-target_link_libraries(velox_dwio_catalog_fbhive velox_dwio_common_exception
-                      fmt::fmt Folly::folly)
+target_link_libraries(velox_dwio_catalog_fbhive
+                      PRIVATE velox_dwio_common_exception Folly::folly fmt::fmt)
 
 if(${VELOX_BUILD_TESTING})
   add_subdirectory(test)

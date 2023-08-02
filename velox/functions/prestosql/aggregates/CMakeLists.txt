@@ -46,14 +46,16 @@ add_library(
 
 target_link_libraries(
   velox_aggregates
-  velox_common_hyperloglog
-  velox_exec
-  velox_expression
-  velox_presto_serializer
-  velox_functions_aggregates
-  velox_functions_lib
-  velox_functions_util
-  Folly::folly)
+  PUBLIC velox_exec velox_expression_functions velox_memory velox_vector
+  PRIVATE velox_common_base
+          velox_common_hyperloglog
+          velox_exception
+          velox_functions_aggregates
+          velox_functions_lib
+          velox_functions_util
+          velox_presto_serializer
+          velox_presto_types
+          Folly::folly)
 
 if(${VELOX_BUILD_TESTING})
   add_subdirectory(tests)

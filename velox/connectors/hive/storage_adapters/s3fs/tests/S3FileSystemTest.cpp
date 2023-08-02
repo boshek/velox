@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-#include "velox/connectors/hive/storage_adapters/s3fs/RegisterS3FileSystem.h"
 #include "velox/connectors/hive/storage_adapters/s3fs/S3FileSystem.h"
-#include "velox/connectors/hive/storage_adapters/s3fs/S3Util.h"
-#include "velox/connectors/hive/storage_adapters/s3fs/tests/MinioServer.h"
 #include "velox/common/file/File.h"
 #include "velox/connectors/hive/FileHandle.h"
+#include "velox/connectors/hive/storage_adapters/s3fs/RegisterS3FileSystem.h"
+#include "velox/connectors/hive/storage_adapters/s3fs/S3Util.h"
+#include "velox/connectors/hive/storage_adapters/s3fs/tests/MinioServer.h"
 #include "velox/exec/tests/utils/TempFilePath.h"
 
 #include <gtest/gtest.h>

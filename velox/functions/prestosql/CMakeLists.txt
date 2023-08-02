@@ -65,15 +65,16 @@ add_library(
 
 target_link_libraries(
   velox_functions_prestosql_impl
-  velox_common_hyperloglog
-  velox_functions_json
-  velox_functions_lib
-  velox_expression
-  md5
-  velox_type_tz
-  velox_presto_types
-  velox_functions_util
-  Folly::folly)
+  PUBLIC velox_core velox_expression velox_functions_json velox_presto_types
+         Boost::regex
+  PRIVATE velox_exception
+          velox_functions_lib
+          velox_functions_util
+          velox_type
+          velox_type_tz
+          velox_vector
+          Boost::headers
+          Folly::folly)
 
 set_property(TARGET velox_functions_prestosql_impl PROPERTY JOB_POOL_COMPILE
                                                             high_memory_pool)

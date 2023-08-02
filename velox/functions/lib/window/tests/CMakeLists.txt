@@ -15,5 +15,6 @@
 add_library(velox_functions_window_test_lib WindowTestBase.cpp)
 
 target_link_libraries(
-  velox_functions_window_test_lib velox_exec_test_lib velox_vector_fuzzer
-  velox_vector_test_lib gflags::gflags gtest)
+  velox_functions_window_test_lib
+  PUBLIC velox_exec_test_lib
+  PRIVATE velox_vector_fuzzer Boost::headers)

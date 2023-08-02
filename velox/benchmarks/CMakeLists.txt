@@ -29,7 +29,10 @@ set(velox_benchmark_deps
     glog::glog)
 
 add_library(velox_benchmark_builder ExpressionBenchmarkBuilder.cpp)
-target_link_libraries(velox_benchmark_builder ${velox_benchmark_deps})
+target_link_libraries(
+  velox_benchmark_builder
+  PUBLIC velox_vector_fuzzer ${velox_benchmark_deps}
+  PRIVATE velox_vector_test_lib Folly::folly)
 
 if(${VELOX_ENABLE_BENCHMARKS})
   add_subdirectory(tpch)

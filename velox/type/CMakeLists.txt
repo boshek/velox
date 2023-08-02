@@ -34,12 +34,5 @@ add_library(
 
 target_link_libraries(
   velox_type
-  velox_type_tz
-  velox_common_base
-  velox_encode
-  velox_exception
-  velox_serialization
-  velox_external_date
-  Boost::headers
-  Folly::folly
-  re2::re2)
+  PUBLIC velox_common_base velox_exception velox_serialization Boost::headers Folly::folly fmt::fmt
+  PRIVATE velox_encode velox_external_date velox_type_tz re2::re2)

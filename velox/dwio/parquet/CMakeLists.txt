@@ -27,7 +27,7 @@ add_library(velox_dwio_parquet_writer RegisterParquetWriter.cpp)
 
 if(VELOX_ENABLE_PARQUET)
   target_link_libraries(velox_dwio_parquet_reader
-                        velox_dwio_native_parquet_reader xsimd)
+                        PRIVATE velox_dwio_native_parquet_reader)
   target_link_libraries(velox_dwio_parquet_writer
-                        velox_dwio_arrow_parquet_writer)
+                        PRIVATE velox_dwio_arrow_parquet_writer)
 endif()

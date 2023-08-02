@@ -16,8 +16,10 @@ add_library(
   velox_expression_functions FunctionSignature.cpp SignatureBinder.cpp
                              ReverseSignatureBinder.cpp)
 
-target_link_libraries(velox_expression_functions velox_common_base
-                      velox_type_calculation)
+target_link_libraries(
+  velox_expression_functions
+  PUBLIC velox_exception velox_type Boost::headers
+  PRIVATE velox_type_calculation)
 
 add_library(
   velox_expression
@@ -41,8 +43,16 @@ add_library(
   PeeledEncoding.cpp)
 
 target_link_libraries(
-  velox_expression velox_core velox_vector velox_common_base
-  velox_expression_functions velox_functions_util)
+  velox_expression
+  PUBLIC velox_core velox_expression_functions velox_time velox_type
+         velox_vector Folly::folly
+  PRIVATE velox_common_base
+          velox_exception
+          velox_external_date
+          velox_functions_util
+          velox_test_util
+          Boost::headers
+          fmt::fmt)
 
 add_subdirectory(type_calculation)
 

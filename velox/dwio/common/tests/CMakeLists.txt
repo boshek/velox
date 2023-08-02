@@ -60,17 +60,17 @@ add_library(velox_e2e_filter_test_base E2EFilterTestBase.cpp)
 
 target_link_libraries(
   velox_e2e_filter_test_base
-  velox_functions_prestosql
-  velox_parse_parser
-  velox_vector_test_lib
-  velox_link_libs
-  Folly::folly
-  fmt::fmt
-  lz4::lz4
-  lzo2::lzo2
-  zstd::zstd
-  ZLIB::ZLIB
-  ${TEST_LINK_LIBS})
+  PUBLIC velox_dwio_common
+         velox_dwio_common_test_utils
+         velox_link_libs
+         velox_time
+         velox_type
+         velox_type_fbhive
+         velox_vector
+         ${TEST_LINK_LIBS}
+         gtest
+  PRIVATE velox_expression velox_functions_prestosql velox_parse_expression
+          velox_parse_parser velox_parse_utils velox_vector_test_lib)
 
 if(VELOX_ENABLE_ARROW)
   add_executable(velox_dwio_common_bitpack_decoder_benchmark

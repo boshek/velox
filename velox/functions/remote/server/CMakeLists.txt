@@ -16,5 +16,6 @@ add_library(velox_functions_remote_server RemoteFunctionService.cpp)
 
 target_link_libraries(
   velox_functions_remote_server
-  PUBLIC velox_remote_function_thrift velox_functions_remote_get_serde
-         velox_type_fbhive velox_memory)
+  PUBLIC velox_memory thrift::thrift
+  PRIVATE velox_expression velox_functions_remote_get_serde velox_type_fbhive
+          velox_vector)

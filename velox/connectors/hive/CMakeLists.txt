@@ -25,21 +25,35 @@ add_library(
 
 target_link_libraries(
   velox_hive_connector
-  velox_connector
-  velox_dwio_catalog_fbhive
-  velox_dwio_dwrf_reader
-  velox_dwio_dwrf_writer
-  velox_dwio_parquet_reader
-  velox_dwio_parquet_writer
-  velox_file
-  velox_hive_partition_function
-  velox_s3fs
-  velox_hdfs
-  velox_gcs)
+  PUBLIC velox_caching
+         velox_common_compression
+         velox_connector
+         velox_core
+         velox_dwio_common
+         velox_exec
+         velox_expression
+         velox_file
+         velox_type
+         velox_vector
+         Folly::folly
+  PRIVATE velox_common_base
+          velox_config
+          velox_dwio_catalog_fbhive
+          velox_dwio_dwrf_reader
+          velox_dwio_dwrf_writer
+          velox_dwio_parquet_reader
+          velox_dwio_parquet_writer
+          velox_gcs
+          velox_hdfs
+          velox_hive_partition_function
+          velox_s3fs
+          velox_time
+          Boost::headers)
 
 add_library(velox_hive_partition_function HivePartitionFunction.cpp)
 
-target_link_libraries(velox_hive_partition_function velox_core velox_exec)
+target_link_libraries(velox_hive_partition_function PUBLIC velox_core
+                                                           velox_vector)
 
 add_subdirectory(storage_adapters)
 

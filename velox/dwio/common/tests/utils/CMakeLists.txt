@@ -17,16 +17,16 @@ add_library(velox_dwio_common_test_utils BatchMaker.cpp DataFiles.cpp
 
 target_link_libraries(
   velox_dwio_common_test_utils
-  Folly::folly
-  velox_dwio_common
-  velox_dwio_common_exception
-  velox_exception
-  velox_memory
-  velox_type
-  velox_type_fbhive
-  velox_vector)
+  PUBLIC velox_dwio_common
+         velox_dwio_common_exception
+         velox_memory
+         velox_type
+         velox_vector
+         velox_vector_test_lib
+         Folly::folly
+  PRIVATE velox_common_base velox_exception velox_type_fbhive Boost::headers)
 
 # older versions of GCC need it to allow std::filesystem
 if(CMAKE_COMPILER_IS_GNUCC AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9)
-  target_link_libraries(velox_dwio_common_test_utils stdc++fs)
+  target_link_libraries(velox_dwio_common_test_utils PUBLIC stdc++fs)
 endif()

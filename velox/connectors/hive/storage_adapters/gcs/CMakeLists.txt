@@ -18,7 +18,7 @@ add_library(velox_gcs RegisterGCSFileSystem.cpp)
 
 if(VELOX_ENABLE_GCS)
   target_sources(velox_gcs PRIVATE GCSFileSystem.cpp GCSUtil.cpp)
-  target_link_libraries(velox_gcs Folly::folly google-cloud-cpp::storage)
+  target_link_libraries(velox_gcs PRIVATE velox_config)
 
   if(${VELOX_BUILD_TESTING})
     add_subdirectory(tests)
