@@ -56,7 +56,9 @@ jobs:
         with:
           path: '${{ env.CCACHE_DIR }}'
           key: ccache-macos-${{ hashFiles('velox/*') }}
-          restore-keys: ccache-macos-${{ matrix.os }}, ccache-macos
+          restore-keys: 
+            - ccache-macos-${{ matrix.os }} 
+            - ccache-macos
       
       - name: Configure Build
         env:
