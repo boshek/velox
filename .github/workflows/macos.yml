@@ -55,8 +55,8 @@ jobs:
         uses: actions/cache@v4
         with:
           path: '${{ env.CCACHE_DIR }}'
-          key: ccache-macos-${{ matrix.os }}-${{ hashFiles('velox/*') }}
-          restore-keys: ccache-macos-${{ matrix.os }}
+          key: ccache-macos-${{ hashFiles('velox/*') }}
+          restore-keys: ccache-macos-${{ matrix.os }}, ccache-macos
       
       - name: Configure Build
         env:
