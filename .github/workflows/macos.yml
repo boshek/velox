@@ -94,7 +94,7 @@ jobs:
         run: ctest -j $NJOBS --test-dir _build/debug --output-on-failure
 
       - name: Save ccache
-        uses: assignUser/stash/restore@main
+        uses: assignUser/stash/save@main
         with:
           path: '${{ env.CCACHE_DIR }}'
           key: ccache-macos-${{ matrix.os }}
