@@ -68,12 +68,11 @@ jobs:
 
           echo "NJOBS=`sysctl -n hw.ncpu`" >> $GITHUB_ENV
 
-      - name: Cache ccache
-        uses: actions/cache@v4
+      - name: Restore ccache 
+        uses: assignUser/stash/restore@main 
         with:
           path: '${{ env.CCACHE_DIR }}'
-          key: ccache-macos-${{ matrix.os }}-${{ hashFiles('velox/*') }}
-          restore-keys: ccache-macos-${{ matrix.os }}
+          key: ccache-macos-${{ matrix.os }}
 
       - name: Configure Build
         env:
@@ -92,6 +91,13 @@ jobs:
         run: |
             cmake --build _build/debug -j $NJOBS
             ccache -s
+
+      - name: Save ccache
+        uses: assignUser/stash/save@main 
+        with:
+          path: '${{ env.CCACHE_DIR }}'
+          key: ccache-macos-${{ matrix.os }}
+
       - name: Run Tests
         if: false
         run: ctest -j $NJOBS --test-dir _build/debug --output-on-failure
