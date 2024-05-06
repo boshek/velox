@@ -66,6 +66,7 @@ target_include_directories(velox_dwio_common PRIVATE ${Protobuf_INCLUDE_DIRS})
 
 target_link_libraries(
   velox_dwio_common
+  velox_exec
   velox_buffer
   velox_caching
   velox_common_io
@@ -75,6 +76,7 @@ target_link_libraries(
   velox_exception
   velox_expression
   velox_memory
+  ${Protobuf_LIBRARIES}
   Boost::regex
   Folly::folly
   glog::glog)
